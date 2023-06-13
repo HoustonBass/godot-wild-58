@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://dbwcc8pn213fv"]
 
-[ext_resource type="Theme" uid="uid://dynyhmx2ajvt6" path="res://resources/main_theme.tres" id="1_3660a"]
-[ext_resource type="Script" path="res://scenes/main_menu.gd" id="2_myxxs"]
-[ext_resource type="Shader" path="res://resources/materials/materialize.gdshader" id="3_f6mu1"]
-[ext_resource type="Script" path="res://scenes/MasterSlider.gd" id="4_xhsjl"]
+[ext_resource type="Theme" uid="uid://dynyhmx2ajvt6" path="res://resources/main_theme.tres" id="1_kp6yo"]
+[ext_resource type="Script" path="res://scenes/MainMenu/main_menu.gd" id="2_7kvj5"]
+[ext_resource type="Shader" path="res://resources/materials/materialize.gdshader" id="3_pup3w"]
+[ext_resource type="Script" path="res://scenes/MainMenu/MasterSlider.gd" id="4_x407j"]
 
 [sub_resource type="Gradient" id="Gradient_i1e0f"]
 interpolation_mode = 2
@@ -12,7 +12,7 @@ interpolation_mode = 2
 gradient = SubResource("Gradient_i1e0f")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fuic7"]
-shader = ExtResource("3_f6mu1")
+shader = ExtResource("3_pup3w")
 shader_parameter/fragment_number = Vector2(12, 12)
 shader_parameter/dissolve_state = 1.0
 
@@ -75,8 +75,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_3660a")
-script = ExtResource("2_myxxs")
+theme = ExtResource("1_kp6yo")
+script = ExtResource("2_7kvj5")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -140,6 +140,7 @@ text = "Credits"
 language = "en"
 
 [node name="Options" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -175,7 +176,7 @@ text = "Master Volume
 [node name="MasterSlider" type="HBoxContainer" parent="Options/TabContainer/Aduio/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("4_xhsjl")
+script = ExtResource("4_x407j")
 
 [node name="MasterVolumeLabel" type="Label" parent="Options/TabContainer/Aduio/GridContainer/MasterSlider"]
 layout_mode = 2
@@ -187,11 +188,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 
 [node name="MusicVolume" type="Label" parent="Options/TabContainer/Aduio/GridContainer"]
+visible = false
 layout_mode = 2
 text = "Music Volume
 "
 
 [node name="MusicSlider" type="HBoxContainer" parent="Options/TabContainer/Aduio/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -205,11 +208,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 
 [node name="SfxVolume" type="Label" parent="Options/TabContainer/Aduio/GridContainer"]
+visible = false
 layout_mode = 2
 text = "Effects Volume
 "
 
 [node name="SfxSlider" type="HBoxContainer" parent="Options/TabContainer/Aduio/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 

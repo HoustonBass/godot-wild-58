@@ -7,7 +7,7 @@ func _ready():
 	$AnimationPlayer.play("fadeIn")
 
 func play():
-	SceneSwitcher.handle_scene_change("res://scenes/game.tscn")
+	SceneSwitcher.handle_scene_change("res://scenes/Game/game.tscn")
 
 func _unhandled_key_input(event: InputEvent):
 	if event.is_action_pressed("Exit"):

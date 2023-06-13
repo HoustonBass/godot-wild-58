@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm7bwqowd27h1"]
+
+[ext_resource type="Texture2D" uid="uid://byx8jjy6sm23c" path="res://assets/Duck.png" id="1_0wgs3"]
+[ext_resource type="Script" path="res://scenes/Player/player.gd" id="1_aw6vm"]
+
+[sub_resource type="Animation" id="Animation_p8xyg"]
+resource_name = "die"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.1, 27, 0.1, -24, -90, -0.25, 0, 0.25, 0, -93, -0.2, -3, 0.1, 109, 1160.62, -0.0916431, -167.4, 0.279391, 195),
+"times": PackedFloat32Array(0, 0.4, 0.6, 2)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ptw5"]
+_data = {
+"die": SubResource("Animation_p8xyg")
+}
+
+[node name="Player" type="CharacterBody2D"]
+process_mode = 3
+script = ExtResource("1_aw6vm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0wgs3")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(400, 0)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(-39, 1, -8, -15, 15, -5, 30, -22, 43, -10, 16, -4, -11, 14)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-39, 1, -8, -15, 15, -5, 30, -22, 43, -10, 16, -4, -11, 14)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8ptw5")
+}
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

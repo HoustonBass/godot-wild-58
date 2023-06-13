@@ -7,13 +7,20 @@ var gameConfig: GameConfig = GameConfig.new()
 func _ready():
 	var err = config.load(user_file)
 	if err != OK:
-		push_error("Could not load config, falling back to default values")
+		push_warning("Could not load config, falling back to default values")
 	
-	for key in GameConfig.ConfigKeys:
-		gameConfig[key] = config.get_value("Game Config", key, GameConfig.defaults[key])
-
-	return gameConfig
+	for keyStr in GameConfig.ConfigKeys.keys():
+		var key = GameConfig.ConfigKeys[keyStr]
+		var value = config.get_value("Game Config", str(key), GameConfig.defaults[key])
+		gameConfig.set_value(key, value)
+	
 
 func update_config(key: GameConfig.ConfigKeys, value):
-	gameConfig[key] = value
-	config.save(user_file)
+	gameConfig.set_value(key, value)
+	config.set_value("Game Config", str(key), value)
+	var err = config.save(user_file)
+	if err != OK:
+		print(err)
+
+func get_config(key: GameConfig.ConfigKeys):
+	return gameConfig.values[key]

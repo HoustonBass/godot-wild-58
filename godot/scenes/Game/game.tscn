@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfg3h74r33pkn"]
+
+[ext_resource type="Script" path="res://scenes/Game/game.gd" id="1_cxtee"]
+[ext_resource type="PackedScene" uid="uid://bm7bwqowd27h1" path="res://scenes/Player/player.tscn" id="2_y8rqy"]
+[ext_resource type="Script" path="res://scenes/Game/SpawnArea.gd" id="3_1ryoy"]
+[ext_resource type="PackedScene" uid="uid://b7esf0f6vxd60" path="res://scenes/Enemies/Cloud/cloud.tscn" id="4_brw7i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40g8b"]
+size = Vector2(1267, 245.5)
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_cxtee")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1300, 0)
+
+[node name="Water" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_top = 447.0
+offset_right = 1300.0
+offset_bottom = 674.0
+color = Color(0.156863, 0.188235, 0.835294, 1)
+
+[node name="Sky" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_top = -300.0
+offset_right = 1300.0
+offset_bottom = 400.0
+color = Color(0.00047487, 0.865266, 1, 1)
+
+[node name="Grass" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_top = 400.0
+offset_right = 1300.0
+offset_bottom = 440.0
+color = Color(0.235294, 0.835294, 0.403922, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 57.0
+offset_bottom = 26.0
+size_flags_vertical = 0
+
+[node name="ScoreText" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+text = "Score: "
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Player" parent="." instance=ExtResource("2_y8rqy")]
+position = Vector2(259, 151)
+
+[node name="Water" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+position = Vector2(631.5, 551.25)
+shape = SubResource("RectangleShape2D_40g8b")
+
+[node name="SpawnArea" type="Marker2D" parent="."]
+position = Vector2(1269, 329)
+script = ExtResource("3_1ryoy")
+
+[node name="Timer" type="Timer" parent="SpawnArea"]
+autostart = true
+
+[node name="Cloud" parent="." instance=ExtResource("4_brw7i")]
+position = Vector2(461, 159)
+
+[connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="timeout" from="SpawnArea/Timer" to="SpawnArea" method="_on_timer_timeout"]

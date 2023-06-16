@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm7bwqowd27h1"]
+[gd_scene load_steps=6 format=3 uid="uid://bm7bwqowd27h1"]
 
 [ext_resource type="Texture2D" uid="uid://byx8jjy6sm23c" path="res://assets/Duck.png" id="1_0wgs3"]
 [ext_resource type="Script" path="res://scenes/Player/player.gd" id="1_aw6vm"]
+[ext_resource type="AudioStream" uid="uid://c0c78aeo5p1go" path="res://assets/music/JumpSound3.mp3" id="3_3ccdu"]
 
 [sub_resource type="Animation" id="Animation_p8xyg"]
 resource_name = "die"
@@ -58,5 +59,8 @@ polygon = PackedVector2Array(-39, 1, -8, -15, 15, -5, 30, -22, 43, -10, 16, -4, 
 libraries = {
 "": SubResource("AnimationLibrary_8ptw5")
 }
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3ccdu")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

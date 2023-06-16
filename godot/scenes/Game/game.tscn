@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfg3h74r33pkn"]
+[gd_scene load_steps=5 format=3 uid="uid://dfg3h74r33pkn"]
 
 [ext_resource type="Script" path="res://scenes/Game/game.gd" id="1_cxtee"]
 [ext_resource type="PackedScene" uid="uid://bm7bwqowd27h1" path="res://scenes/Player/player.tscn" id="2_y8rqy"]
 [ext_resource type="Script" path="res://scenes/Game/SpawnArea.gd" id="3_1ryoy"]
-[ext_resource type="PackedScene" uid="uid://b7esf0f6vxd60" path="res://scenes/Enemies/Cloud/cloud.tscn" id="4_brw7i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40g8b"]
 size = Vector2(1267, 245.5)
@@ -67,9 +66,6 @@ script = ExtResource("3_1ryoy")
 
 [node name="Timer" type="Timer" parent="SpawnArea"]
 autostart = true
-
-[node name="Cloud" parent="." instance=ExtResource("4_brw7i")]
-position = Vector2(461, 159)
 
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="timeout" from="SpawnArea/Timer" to="SpawnArea" method="_on_timer_timeout"]

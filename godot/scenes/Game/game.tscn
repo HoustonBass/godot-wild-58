@@ -25,13 +25,31 @@ color = Color(0.156863, 0.188235, 0.835294, 1)
 offset_top = -300.0
 offset_right = 1300.0
 offset_bottom = 400.0
-color = Color(0.00047487, 0.865266, 1, 1)
+color = Color(0, 0.866667, 1, 1)
 
 [node name="Grass" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
 offset_top = 400.0
 offset_right = 1300.0
 offset_bottom = 440.0
 color = Color(0.235294, 0.835294, 0.403922, 1)
+
+[node name="sky texture" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = 13.0
+offset_top = -290.0
+offset_right = 2575.0
+offset_bottom = 363.0
+
+[node name="grass texture" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = 19.0
+offset_top = 383.0
+offset_right = 2568.0
+offset_bottom = 425.0
+
+[node name="water texture" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = 27.0
+offset_top = 456.0
+offset_right = 2598.0
+offset_bottom = 635.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1

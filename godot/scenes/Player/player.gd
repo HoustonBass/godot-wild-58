@@ -37,10 +37,11 @@ func _physics_process(delta):
 	rotation += angular_velocity * delta
 	move_and_slide()
 
+func _ready():
+	$AnimatedSprite2D.play("flapping")
 
 func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemy"):
 		died.emit()
-		$AnimationPlayer.play("die")
 		
 		

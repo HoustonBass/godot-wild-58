@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-const GLIDE_VELOCITY = 125.0
-const JUMP_VELOCITY = -400.0
-
-var jumpHeld = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = 980
+var gravity = 400
 var water_gravity = 600
+const MAX_FALL_SPEED = 200
+const FLAP = 200
+const MAX_ROTATION = -PI/ 4;
+var angular_velocity = 0;
 
 signal died
 
@@ -17,26 +17,31 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 
 	# Handle Jump.
+	if velocity.y > MAX_FALL_SPEED:
+		velocity.y = MAX_FALL_SPEED
 	if Input.is_action_just_pressed("jump"):
-		velocity.y = JUMP_VELOCITY
-		jumpHeld = true
-	if Input.is_action_just_released("jump"):
-		jumpHeld = false
-	if jumpHeld and velocity.y > GLIDE_VELOCITY:
-		velocity.y = GLIDE_VELOCITY
+		velocity.y = -FLAP
+		angular_velocity -= PI 
+		$JumpSound.play()
 
-	#move_and_slide()
+	if rotation <= MAX_ROTATION :
+		rotation = MAX_ROTATION
+		angular_velocity = 0
 	
-	# todo tune this
-	var tilt = ((clamp(abs(velocity.y) - abs(velocity.x), -400, 400)/400) + 1) / 2
-	var min_angle = deg_to_rad(-25.0)
-	var max_angle = deg_to_rad(30.0)
-	rotation = lerp_angle(min_angle, max_angle, tilt)
+	if velocity.y > 0:
+		if rotation <= 0:
+			angular_velocity = PI / 2
+		else:
+			angular_velocity = 0
+	
+	rotation += angular_velocity * delta
+	move_and_slide()
 
+func _ready():
+	$AnimatedSprite2D.play("flapping")
 
 func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemy"):
 		died.emit()
-		$AnimationPlayer.play("die")
 		
 		

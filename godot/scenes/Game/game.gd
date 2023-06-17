@@ -1,6 +1,6 @@
 extends Node2D
 
-var concerning_hobbits = load("res://assets/music/concerning-hobbits-lofi.ogg")
+var concerning_hobbits = load("res://assets/music/AirAndWaterDucking.mp3")
 
 var offset
 

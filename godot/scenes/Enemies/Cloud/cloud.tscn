@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7esf0f6vxd60"]
 
-[ext_resource type="Texture2D" uid="uid://fwx0dpqayxpj" path="res://assets/cloud.png" id="1_2uhlw"]
 [ext_resource type="Script" path="res://scenes/Enemies/Cloud/cloud.gd" id="2_4fbpf"]
+[ext_resource type="Texture2D" uid="uid://fcw6po4iflio" path="res://assets/Cloud-removebg-preview.png" id="2_aicaq"]
 
 [node name="Cloud" type="RigidBody2D" groups=["enemy"]]
 collision_mask = 2
@@ -9,12 +9,14 @@ gravity_scale = 0.0
 script = ExtResource("2_4fbpf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_2uhlw")
+position = Vector2(-5, 29)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_aicaq")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 enable_node_path = NodePath("../Sprite2D")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-88, 27, -84, -6, -34, -48, -1, -32, 33, -41, 81, 5, 71, 46, -63, 47)
+polygon = PackedVector2Array(-88, 27, -91, 1, -41, -33, -1, -32, 53, -30, 94, 12, 91, 42, -63, 47)
 
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

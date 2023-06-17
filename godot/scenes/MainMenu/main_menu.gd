@@ -1,6 +1,6 @@
 extends Control
 
-var cantina_band = load("res://assets/music/cantina-band-lofi.ogg")
+var cantina_band = load("res://assets/music/FindYourHomeDucky 1.0.mp3")
 
 func _ready():
 	MusicController.crossfade_to(cantina_band)

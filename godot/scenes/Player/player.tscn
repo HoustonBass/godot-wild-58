@@ -1,62 +1,49 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm7bwqowd27h1"]
+[gd_scene load_steps=6 format=3 uid="uid://bm7bwqowd27h1"]
 
-[ext_resource type="Texture2D" uid="uid://byx8jjy6sm23c" path="res://assets/Duck.png" id="1_0wgs3"]
 [ext_resource type="Script" path="res://scenes/Player/player.gd" id="1_aw6vm"]
+[ext_resource type="AudioStream" uid="uid://c0c78aeo5p1go" path="res://assets/music/JumpSound3.mp3" id="3_3ccdu"]
+[ext_resource type="Texture2D" uid="uid://bipscx10746ex" path="res://assets/Duck_4-removebg-preview.png" id="5_v0qiu"]
+[ext_resource type="Texture2D" uid="uid://bs1gfit06cnlb" path="res://assets/Duck_5-removebg-preview.png" id="6_8ufea"]
 
-[sub_resource type="Animation" id="Animation_p8xyg"]
-resource_name = "die"
-length = 2.0
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:offset:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.1, 27, 0.1, -24, -90, -0.25, 0, 0.25, 0, -93, -0.2, -3, 0.1, 109, 1160.62, -0.0916431, -167.4, 0.279391, 195),
-"times": PackedFloat32Array(0, 0.4, 0.6, 2)
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ptw5"]
-_data = {
-"die": SubResource("Animation_p8xyg")
-}
+[sub_resource type="SpriteFrames" id="SpriteFrames_pvpd4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_v0qiu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8ufea")
+}],
+"loop": true,
+"name": &"flapping",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 process_mode = 3
 script = ExtResource("1_aw6vm")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_0wgs3")
-metadata/_edit_lock_ = true
-
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(400, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(14, 2)
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_pvpd4")
+animation = &"flapping"
+frame_progress = 0.74393
 
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
-polygon = PackedVector2Array(-39, 1, -8, -15, 15, -5, 30, -22, 43, -10, 16, -4, -11, 14)
+position = Vector2(2, -2)
+polygon = PackedVector2Array(-39, 1, -8, -15, 15, -5, 21, -30, 44, -23, 16, -4, -11, 14)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-39, 1, -8, -15, 15, -5, 30, -22, 43, -10, 16, -4, -11, 14)
+position = Vector2(9, 3)
+polygon = PackedVector2Array(-39, 1, -8, -15, 9, -13, 24, -40, 47, -22, 16, -4, -18, 25)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_8ptw5")
-}
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3ccdu")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

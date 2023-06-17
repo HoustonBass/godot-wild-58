@@ -1,15 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbwcc8pn213fv"]
+[gd_scene load_steps=13 format=3 uid="uid://dbwcc8pn213fv"]
 
 [ext_resource type="Theme" uid="uid://dynyhmx2ajvt6" path="res://resources/main_theme.tres" id="1_kp6yo"]
 [ext_resource type="Script" path="res://scenes/MainMenu/main_menu.gd" id="2_7kvj5"]
 [ext_resource type="Shader" path="res://resources/materials/materialize.gdshader" id="3_pup3w"]
+[ext_resource type="Texture2D" uid="uid://o617e6js0p8e" path="res://assets/BackgroundImage.jpg" id="3_qig5t"]
 [ext_resource type="Script" path="res://scenes/MainMenu/MasterSlider.gd" id="4_x407j"]
-
-[sub_resource type="Gradient" id="Gradient_i1e0f"]
-interpolation_mode = 2
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1jm2t"]
-gradient = SubResource("Gradient_i1e0f")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fuic7"]
 shader = ExtResource("3_pup3w")
@@ -18,6 +13,12 @@ shader_parameter/dissolve_state = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_rssmo"]
 font_size = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yvsp"]
+bg_color = Color(0.988235, 0.556863, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3pev6"]
+bg_color = Color(0.988235, 0.556863, 0, 0.94902)
 
 [sub_resource type="Animation" id="Animation_6i8y0"]
 length = 0.001
@@ -85,7 +86,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_1jm2t")
+texture = ExtResource("3_qig5t")
+expand_mode = 1
 
 [node name="Menu" type="Control" parent="."]
 material = SubResource("ShaderMaterial_fuic7")
@@ -110,7 +112,7 @@ alignment = 1
 [node name="Label" type="Label" parent="Menu/VBoxContainer"]
 use_parent_material = true
 layout_mode = 2
-text = "GAME TITLE"
+text = "Ducking"
 label_settings = SubResource("LabelSettings_rssmo")
 horizontal_alignment = 1
 
@@ -122,10 +124,13 @@ theme_override_constants/separation = 6
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_8yvsp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3pev6")
 text = "Play"
 language = "en"
 
 [node name="Options" type="Button" parent="Menu/VBoxContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -133,6 +138,7 @@ text = "Options"
 language = "en"
 
 [node name="Credits" type="Button" parent="Menu/VBoxContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
 size_flags_horizontal = 4

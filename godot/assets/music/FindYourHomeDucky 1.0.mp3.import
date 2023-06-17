@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://k44tajpil1pa"
+path="res://.godot/imported/FindYourHomeDucky 1.0.mp3-33bf35f466b339a5bf676afbd9215a7d.mp3str"
+
+[deps]
+
+source_file="res://assets/music/FindYourHomeDucky 1.0.mp3"
+dest_files=["res://.godot/imported/FindYourHomeDucky 1.0.mp3-33bf35f466b339a5bf676afbd9215a7d.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
